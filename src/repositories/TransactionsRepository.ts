@@ -17,10 +17,10 @@ class TransactionsRepository extends Repository<Transaction> {
       (accumulator, transaction) => {
         switch (transaction.type) {
           case 'income':
-            accumulator.income += parseFloat(transaction.value);
+            accumulator.income += Number(transaction.value);
             break;
           case 'outcome':
-            accumulator.outcome += parseFloat(transaction.value);
+            accumulator.outcome += Number(transaction.value);
             break;
           default:
             break;
@@ -31,16 +31,13 @@ class TransactionsRepository extends Repository<Transaction> {
       {
         income: 0,
         outcome: 0,
+        total: 0,
       },
     );
 
-    const balance: Balance = {
-      income,
-      outcome,
-      total: income - outcome,
-    };
+    const total = income - outcome;
 
-    return balance;
+    return { income, outcome, total };
   }
 }
 

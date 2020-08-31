@@ -43,7 +43,7 @@ class CreateTransactionService {
 
     const transaction = transactionsRepository.create({
       title,
-      value: value.toString(),
+      value,
       type,
       category: categoryExists,
     });
